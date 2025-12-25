@@ -1,7 +1,7 @@
 import os
 import fitz
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from logger.custom_logger import CustomLogger
 from exception.custom_exception import DocumentPortalException
 
@@ -17,7 +17,7 @@ class DocumentHandler:
                 "DATA_STORAGE_PATH",
                 os.path.join(os.getcwd(), "data", "document_analysis")
             )
-            self.session_id = session_id or f"session_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
+            self.session_id = session_id or f"session_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
             
             # Create base session directory
             self.session_path = os.path.join(self.data_dir, self.session_id)
@@ -29,7 +29,6 @@ class DocumentHandler:
         except Exception as e:
             self.log.error(f"Error initializing DocumentHandler: {e}")
             raise DocumentPortalException("Error initializing DocumentHandler", e) from e
-        
 
     def save_pdf(self,uploaded_file):
         try:
