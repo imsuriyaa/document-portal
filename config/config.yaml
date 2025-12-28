@@ -3,7 +3,7 @@ faiss_db:
 
 
 embedding_model:
-  provider: "google"
+  provider: "openai"
   model_name: "models/text-embedding-004"
 
 retriever:
