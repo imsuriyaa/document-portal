@@ -4,7 +4,7 @@ faiss_db:
 
 embedding_model:
   provider: "openai"
-  model_name: "models/text-embedding-004"
+  model_name: "text-embedding-3-small"
 
 retriever:
   top_k: 10
